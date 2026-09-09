@@ -1,0 +1,302 @@
+/* =========================================================
+   MWANJE GENERAL HARDWARE — stylesheet
+   Comments are here to explain WHY, not just what — useful
+   since you're still learning CSS.
+   ========================================================= */
+
+/* ---- Design tokens ----
+   Keeping colours and spacing as CSS variables means we only
+   change a value in ONE place if we want to retheme later. */
+:root {
+  --paper: #F2EEE4;       /* warm off-white background, like invoice paper */
+  --ink: #21201C;         /* near-black, warm not pure black */
+  --steel: #4B5563;       /* steel blue-grey, for secondary text/borders */
+  --steel-dark: #262B2E;  /* dark steel, header/footer/hero background */
+  --safety: #D9591C;      /* safety-orange accent, used sparingly */
+  --safety-light: #F0A94E;/* lighter amber, for hover states */
+  --line: rgba(33,32,28,0.14);
+
+  --font-head: 'Oswald', sans-serif;
+  --font-body: 'Work Sans', sans-serif;
+}
+
+/* ---- Reset-ish basics ---- */
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3 { font-family: var(--font-head); margin: 0; line-height: 1.05; }
+p { margin: 0; }
+a { color: inherit; text-decoration: none; }
+img, svg { display: block; max-width: 100%; }
+
+/* A consistent centred content column used across sections */
+.wrap {
+  width: 100%;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Visible keyboard focus (accessibility) */
+a:focus-visible, button:focus-visible {
+  outline: 3px solid var(--safety);
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   HEADER
+   ========================================================= */
+.site-header {
+  background: var(--steel-dark);
+  color: var(--paper);
+  border-bottom: 4px solid var(--safety);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-head);
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.02em;
+}
+.brand-mark { color: var(--safety-light); }
+
+.site-nav { display: flex; align-items: center; gap: 24px; }
+.site-nav a { font-size: 0.95rem; color: var(--paper); opacity: 0.85; }
+.site-nav a:hover { opacity: 1; }
+.nav-call {
+  background: var(--safety);
+  color: var(--steel-dark) !important;
+  opacity: 1 !important;
+  padding: 8px 14px;
+  font-weight: 600;
+}
+.nav-call:hover { background: var(--safety-light); }
+
+/* =========================================================
+   HERO
+   ========================================================= */
+.hero { background: var(--steel-dark); color: var(--paper); padding: 56px 0 0; }
+.hero-inner { padding-bottom: 0; }
+
+/* The "stamped steel plate" panel */
+.plate {
+  position: relative;
+  border: 2px solid var(--safety);
+  padding: 44px 32px;
+  margin-bottom: 0;
+}
+.rivet {
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--safety);
+}
+.rivet.tl { top: -6px; left: -6px; }
+.rivet.tr { top: -6px; right: -6px; }
+.rivet.bl { bottom: -6px; left: -6px; }
+.rivet.br { bottom: -6px; right: -6px; }
+
+.eyebrow {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.85rem;
+  color: var(--safety-light);
+  margin-bottom: 14px;
+}
+.hero h1 {
+  font-size: clamp(2.4rem, 6vw, 4.2rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.01em;
+}
+.hero-line {
+  margin-top: 20px;
+  max-width: 46ch;
+  font-size: 1.1rem;
+  color: rgba(242,238,228,0.85);
+}
+.hero-actions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 32px; }
+
+.btn {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.95rem;
+  padding: 12px 22px;
+  border: 2px solid var(--safety);
+}
+.btn-primary { background: var(--safety); color: var(--steel-dark); }
+.btn-primary:hover { background: var(--safety-light); border-color: var(--safety-light); }
+.btn-ghost { background: transparent; color: var(--paper); }
+.btn-ghost:hover { border-color: var(--paper); }
+
+/* Spec strip: three quick facts under the plate */
+.spec-strip {
+  margin: 0;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid rgba(242,238,228,0.2);
+}
+.spec {
+  padding: 20px 32px;
+  border-left: 1px solid rgba(242,238,228,0.2);
+}
+.spec:first-child { border-left: none; }
+.spec dt {
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--safety-light);
+  margin-bottom: 6px;
+}
+.spec dd { margin: 0; font-size: 0.95rem; }
+.spec a:hover { color: var(--safety-light); }
+
+/* =========================================================
+   WHAT WE STOCK
+   ========================================================= */
+.stock { padding: 72px 0; }
+.section-heading {
+  font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+  text-transform: uppercase;
+}
+.section-sub {
+  margin-top: 10px;
+  color: var(--steel);
+  max-width: 50ch;
+}
+
+.bin-grid {
+  margin-top: 40px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2px;
+  background: var(--line); /* creates thin grid lines between bins */
+}
+.bin {
+  background: var(--paper);
+  padding: 28px 24px;
+  grid-column: span 2;
+}
+.bin-lg { grid-column: span 2; }
+/* On wide screens, arrange as: 2 + 2 + 2 columns of the 4-col grid,
+   two of the six get slightly more room via bin-lg on desktop only */
+@media (min-width: 800px) {
+  .bin { grid-column: span 2; }
+}
+
+.bin-icon { color: var(--safety); margin-bottom: 16px; }
+.bin-icon svg { width: 36px; height: 36px; }
+.bin h3 { font-size: 1.2rem; margin-bottom: 8px; text-transform: uppercase; }
+.bin p { color: var(--steel); font-size: 0.95rem; }
+
+/* =========================================================
+   VISIT US
+   ========================================================= */
+.visit { background: var(--steel-dark); color: var(--paper); padding: 72px 0; }
+.visit .section-heading { color: var(--paper); }
+.visit-inner {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.visit-text p { margin: 18px 0 26px; color: rgba(242,238,228,0.85); max-width: 48ch; }
+
+.hours-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.hours-table caption {
+  text-align: left;
+  font-family: var(--font-head);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: 0.85rem;
+  color: var(--safety-light);
+  margin-bottom: 12px;
+}
+.hours-table th, .hours-table td {
+  text-align: left;
+  padding: 10px 0;
+  border-top: 1px solid rgba(242,238,228,0.18);
+  font-weight: 400;
+}
+.hours-table th { color: rgba(242,238,228,0.7); font-weight: 500; }
+.hours-table td { text-align: right; }
+.hours-sun th, .hours-sun td { color: var(--safety-light); font-weight: 600; }
+
+/* Added by script.js on whichever row matches today's date */
+.hours-table .is-today th,
+.hours-table .is-today td {
+  color: var(--paper);
+  font-weight: 600;
+}
+.hours-table .is-today th::after {
+  content: "today";
+  display: inline-block;
+  margin-left: 8px;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--safety);
+  vertical-align: middle;
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+.site-footer { background: var(--ink); color: var(--paper); padding: 28px 0; }
+.footer-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.footer-brand { font-family: var(--font-head); text-transform: uppercase; font-size: 1rem; margin-bottom: 4px; }
+.footer-inner p { color: rgba(242,238,228,0.7); font-size: 0.9rem; }
+.footer-phone { font-weight: 600; color: var(--safety-light); }
+.footer-phone:hover { color: var(--safety); }
+
+/* =========================================================
+   RESPONSIVE — mobile
+   ========================================================= */
+@media (max-width: 720px) {
+  .site-nav { gap: 14px; }
+  .site-nav a:not(.nav-call) { display: none; } /* keep just the call button on small screens */
+
+  .spec-strip { grid-template-columns: 1fr; }
+  .spec { border-left: none; border-top: 1px solid rgba(242,238,228,0.2); }
+  .spec:first-child { border-top: none; }
+
+  .bin-grid { grid-template-columns: 1fr 1fr; }
+  .bin, .bin-lg { grid-column: span 1; }
+
+  .visit-inner { grid-template-columns: 1fr; }
+}
+
+/* Respect users who've asked for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
