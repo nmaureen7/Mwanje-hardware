@@ -234,8 +234,8 @@ a:focus-visible, button:focus-visible {
 .bin-photo-frame {
   height: 160px;
   overflow: hidden;
-  margin-bottom: 20px;
-  border: 5px solid var(--safety);
+  margin-bottom: 16px;
+  border: 2px solid var(--safety);
 }
 
 .bin-photo {
