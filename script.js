@@ -13,4 +13,15 @@ document.addEventListener('DOMContentLoaded', () => {
       row.classList.add('is-today');
     }
   });
+  // Fade in each category card as it scrolls into view
+  const bins = document.querySelectorAll('.bin');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+  bins.forEach((bin) => observer.observe(bin));
 });
